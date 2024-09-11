@@ -2,6 +2,7 @@ import streamlit as st
 from contrato import vendas
 from datetime import datetime
 from pydantic import ValidationError
+from database import salvar_no_postgres
 
 def main ():
     st.title("Sistema de CRM e Vendas da ZapFlow - FrontEnd Simples")
@@ -25,13 +26,14 @@ def main ():
                 produto = produto       
             )
             
-            st.write('**Dados da Venda')
+            st.write('**Dados da Venda**')
             st.write(f'Email do vendedor: {email}')
             st.write(f'Data e Hora da Compra: {data_hora}')
             st.write(f'Valor da venda: {valor:.2f}')
             st.write(f'Quantidade de Produtos: {quantidade}')
             st.write(f'Produto vendido: {produto }')
-            
+            salvar_no_postgres(venda)
+        
         except ValidationError as e:
             st.error(f"Deu erro {e}")
         
