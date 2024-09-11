@@ -1,14 +1,19 @@
 from datetime import datetime
 from typing import Tuple
-
-from pydantic import BaseModel, EmailStr, validate_call
+from pydantic import BaseModel, EmailStr, PositiveFloat,PositiveInt
 from enum import Enum
 
-class ProdutoEnum(str,Enum)
+
+
+class ProdutoEnum(str,Enum):
+    produto1 = "Zapflow com Gemini"
+    produto2 = "Zapflow com ChatGPT"
+    produto3 = "Zapflow com LLama 3.0"
     
 class vendas(BaseModel):
-    email: Emailstr
+    email: EmailStr
     data: datetime
-    valor: float
-    quantidade: int
-    produto: str
+    valor: PositiveFloat
+    quantidade: PositiveInt
+    produto: ProdutoEnum
+    
